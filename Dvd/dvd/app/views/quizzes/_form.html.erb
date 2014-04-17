@@ -1,0 +1,32 @@
+<%= simple_form_for ([@test, @quiz]), defaults: { input_html: { class: 'form-horizontal' } } do |f| %>
+  <% if @quiz.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@quiz.errors.count, "error") %> prohibited this quiz from being saved:</h2>
+
+      <ul>
+      <% @quiz.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= f.fields_for(@question) do |f| %>
+      <div class="form-group">
+          <%= f.label :theme_list, "Catégories" %><br>
+          <%= f.collection_check_boxes :theme_list, @all_themes, :name, :name, html_options = {class: "checkbox"} %>
+      </div>
+      <div class="form-group">
+          <%= f.label :level_list, "Niveau de difficulté" %><br>
+          <%= f.collection_check_boxes :level_list, @all_levels, :name, :name, html_options = {class: "checkbox"} %>
+      </div>
+  <% end %>
+    
+  
+
+
+    <%= f.button :submit, class: 'btn btn-warning' %>
+
+<% end %>
+
+

@@ -1,0 +1,28 @@
+<h1>Mon nouveau quiz aura les questions suivantes : </h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Query</th>
+      <th>Explanation</th>
+      <th>Level(s)</th>
+      <th>Theme(s)</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @questions.each do |question| %>
+      <tr>
+        <td><%= question.query %></td>
+        <td><%= question.explanation %></td>
+        <td><%= question.level_list %></td>
+        <td><%= question.theme_list %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+

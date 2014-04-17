@@ -1,0 +1,45 @@
+<%= simple_form_for([@quiz, @question]), defaults: { input_html: { class: 'form-horizontal' } } do |f| %>
+  <% if @question.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@question.errors.count, "error") %> prohibited this question from being saved:</h2>
+
+      <ul>
+      <% @question.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :query %><br>
+    <%= f.text_field :query %>
+  </div>
+  <div class="field">
+    <%= f.label :explanation %><br>
+    <%= f.text_field :explanation %>
+  </div>
+
+  <%= f.fields_for :answers, @answers do |a|%>
+  <ul>
+    <li>
+      <%= a.label @question.answers.good_answer %>
+      <%= a.radio_button :chosen_answer, @challenge_step.question.answer.good_answer %>
+    </li>
+    <li>
+      <%= a.label @question.answers.answer1 %>
+      <%= a.radio_button :chosen_answer, @challenge_step.question.answers.answer1 %>
+    </li>
+    <li>
+      <%= a.label @question.answers.answer2 %>
+      <%= a.radio_button :chosen_answer, @challenge_step.question.answers.answer2 %>
+    </li>
+  </ul>
+  <% end %>
+
+
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
