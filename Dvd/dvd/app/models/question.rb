@@ -1,5 +1,5 @@
 class Question < ActiveRecord::Base
-	has_many :questions_quizzes
+	has_many :questions_quizzes, order: :position
 	has_many :quizzes, :through => :questions_quizzes
 	has_many :answers
 
@@ -18,17 +18,8 @@ class Question < ActiveRecord::Base
 	  # return if the question is a qcm (it has proposals), or an open question (it has solutions)
 	end
 
-	def next(quizz, question_id)
-		# index = quizz.questions.map.with_index{|question, index| index}
-		# array = index.zip(0..(quizz.questions.count))
-		# current_position = array[question_id]
-
-
-		# current_question = quizz.questions.find(question_id)
-
-		# quizz.questions.each_with_index do |question, index|
-		# 	current_question.index += 1
-		# end
+	def next(quizz)
+		quizz.questions_quizzes.next
 		
 	end
 

@@ -8,7 +8,7 @@ class Quiz < ActiveRecord::Base
 
 
   def question(position)
-  	params[:id]
+  	# params[:id]
   end
 
 end

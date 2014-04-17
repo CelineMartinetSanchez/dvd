@@ -12,8 +12,8 @@ class QuestionsController < ApplicationController
   def show
     # passe l'id de la question suivante
     
-    @next_question = @question.next(set_quiz, @question.id)
-    pry
+    @next_question = @question.next(set_quiz.id)
+    # pry
   end
 
   # GET /questions/new
