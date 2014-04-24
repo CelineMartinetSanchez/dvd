@@ -31,6 +31,8 @@ ActiveRecord::Schema.define(version: 20140417221357) do
   create_table "questions", force: true do |t|
     t.string   "query"
     t.string   "explanation"
+    t.string   "levels"
+    t.string   "themes"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

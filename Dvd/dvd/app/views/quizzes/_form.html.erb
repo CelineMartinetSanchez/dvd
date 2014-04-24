@@ -11,7 +11,7 @@
     </div>
   <% end %>
 
-  <%= f.fields_for(@question) do |f| %>
+  <%= f.simple_fields_for(@question) do |f| %>
       <div class="form-group">
           <%= f.label :theme_list, "Catégories" %><br>
           <%= f.collection_check_boxes :theme_list, @all_themes, :name, :name, html_options = {class: "checkbox"} %>

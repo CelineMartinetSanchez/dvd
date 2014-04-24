@@ -4,24 +4,28 @@ class QuestionsController < ApplicationController
 
   # GET /questions
   # GET /questions.json
-  def index
+
+  def quiz_questions
     @questions = set_quiz.questions
+  end
+
+  def index
+    @questions = Question.all
   end
 
   def show
     # passe l'id de la question suivante
     @next_question = @question.next(@quiz)
-    proposals_array = []
-    @question.answers.first.each {|answer| proposals_array << answer}
-    @proposals = proposals_array.shuffle
-    bla
+
     # @question.proposals.create()
   end
 
   # GET /questions/new
   def new
     @question = Question.new
-    3.times {@question.answers.build}
+    @question.answers.build
+    @all_themes = get_themes
+    @all_levels = get_levels
   end
 
   # GET /questions/1/edit
@@ -34,10 +38,17 @@ class QuestionsController < ApplicationController
     @question = Question.new(question_params)
     @question.answers.build(params[:question][:answer])
 
+    # Creating associations for themes and levels
+    asked_themes = params[:question][:theme_list].reject { |c| c.empty? }
+    asked_levels = params[:question][:level_list].reject { |c| c.empty? }
+    @question.theme_list.add(asked_themes)
+    @question.level_list.add(asked_levels)
+
+
     respond_to do |format|
       if @question.save
-        format.html { redirect_to @questions, notice: 'Question was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @questions }
+        format.html { redirect_to questions_path, notice: 'Question was successfully created.' }
+        format.json { render action: 'show', status: :created, location: questions_path }
       else
         format.html { render action: 'new' }
         format.json { render json: @question.errors, status: :unprocessable_entity }
@@ -77,11 +88,19 @@ class QuestionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def question_params
-      params.require(:question).permit(:query, :explanation, :answers_attributes)
+      params.require(:question).permit(:query, :explanation, answers_attributes:[:id, :title, :true_false, :_destroy])
     end
 
     def set_quiz
       @quiz = Quiz.find(params[:quiz_id])
+    end
+
+    def get_themes
+      Question.theme_counts
+    end
+
+    def get_levels
+      Question.level_counts
     end
 
 end

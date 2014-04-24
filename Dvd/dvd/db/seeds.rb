@@ -5,16 +5,22 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-q1 = Question.create(query:"I love my job", explanation:"I work for Google") 
+q1 = Question.create(query:"Who am I?", explanation:"Big Brother") 
 q2 = Question.create(query:"I am going to be a big giant my friend!", explanation:"My father is Microsoft")
 q3 = Question.create(query:"I am so powerful", explanation:"Google")
 
 # THEMES AND LEVELS
 q1.theme_list.add("google")
 q1.level_list.add("facile")
+q1.answers.build(title:"Google", true_false:"true")
+q1.answers.build(title:"Bing", true_false:"false")
+q1.answers.build(title:"Yahoo", true_false:"false")
 
 q2.theme_list.add("bing")
 q2.level_list.add("compliqué")
+q2.answers.build(title:"Google", true_false:"false")
+q2.answers.build(title:"Bing", true_false:"true")
+q2.answers.build(title:"Yahoo", true_false:"false")
 
 q3.theme_list.add("google", "bing")
 q3.level_list.add("compliqué")

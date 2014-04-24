@@ -7,7 +7,7 @@
       <th>Explanation</th>
       <th>Level(s)</th>
       <th>Theme(s)</th>
-      <th>Réponses</th>
+      <th></th>
     </tr>
   </thead>
 
@@ -18,10 +18,6 @@
         <td><%= question.explanation %></td>
         <td><%= question.level_list %></td>
         <td><%= question.theme_list %></td>
-        <td><% question.answers.each do |answer| %>
-           <%= answer.title %>
-           <% end %>
-         </td>
       </tr>
     <% end %>
   </tbody>

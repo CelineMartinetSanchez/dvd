@@ -2,7 +2,7 @@ class Question < ActiveRecord::Base
 	has_many :questions_quizzes
 	has_many :quizzes, :through => :questions_quizzes
 	has_many :answers, :dependent => :destroy
-	accepts_nested_attributes_for :answers, :reject_if => lambda { |a| a[:title].blank? }, :allow_destroy => true
+	accepts_nested_attributes_for :answers, :reject_if => :all_blank, :allow_destroy => true
 
 	has_many :proposals
 
@@ -13,6 +13,9 @@ class Question < ActiveRecord::Base
 	scope :by_join_date, order("created_at DESC")
 
 	accepts_nested_attributes_for :quizzes
+
+	serialize :themes
+	serialize :levels
 	
 	def qcm?
 	  # return if the question is a qcm (it has proposals), or an open question (it has solutions)

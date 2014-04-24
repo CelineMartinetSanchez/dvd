@@ -1,0 +1,12 @@
+<div class="nested-fields">
+	<%= f.label :title, "Contenu de la réponse" %>
+  <%= f.input :title, label:false %></br>
+  <div class="true_false">
+  	<%= f.label :true_false, "Vrai", :value => "true"  %>
+  	<%= f.radio_button :true_false, true %>
+  	<%= f.label :true_false, "Faux", :value => "false" %>
+  	<%= f.radio_button :true_false, false, :checked => true %></br>
+  	<%= link_to_remove_association "Supprimer la réponse", f %>
+  </div>
+</div>
+
