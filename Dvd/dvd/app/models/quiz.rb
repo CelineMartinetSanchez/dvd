@@ -1,5 +1,5 @@
 class Quiz < ActiveRecord::Base
-	belongs_to :test
+	belongs_to :user
   has_many :questions_quizzes
   has_many :questions, through: :questions_quizzes
 

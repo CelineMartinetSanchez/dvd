@@ -11,13 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140416142539) do
+ActiveRecord::Schema.define(version: 20140417221357) do
 
   create_table "answers", force: true do |t|
-    t.string   "good_answer"
-    t.string   "bad_answer"
-    t.string   "bad_answer_2"
-    t.integer  "test_id"
+    t.boolean  "true_false"
+    t.string   "title"
     t.integer  "question_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -37,7 +35,7 @@ ActiveRecord::Schema.define(version: 20140416142539) do
     t.datetime "updated_at"
   end
 
-  create_table "questions_quizzes", id: false, force: true do |t|
+  create_table "questions_quizzes", force: true do |t|
     t.integer "quiz_id"
     t.integer "question_id"
     t.integer "position"
@@ -46,11 +44,11 @@ ActiveRecord::Schema.define(version: 20140416142539) do
   add_index "questions_quizzes", ["quiz_id", "question_id"], name: "index_questions_quizzes_on_quiz_id_and_question_id"
 
   create_table "quizzes", force: true do |t|
-    t.integer  "test_id"
+    t.integer  "user_id"
+    t.string   "levels"
+    t.string   "themes"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "themes"
-    t.string   "levels"
   end
 
   create_table "taggings", force: true do |t|
@@ -72,12 +70,6 @@ ActiveRecord::Schema.define(version: 20140416142539) do
 
   add_index "tags", ["name"], name: "index_tags_on_name", unique: true
 
-  create_table "tests", force: true do |t|
-    t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "users", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
@@ -92,8 +84,15 @@ ActiveRecord::Schema.define(version: 20140416142539) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
+    t.string   "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string   "unconfirmed_email"
+    t.string   "provider"
+    t.string   "uid"
   end
 
+  add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
 

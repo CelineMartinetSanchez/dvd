@@ -3,7 +3,6 @@ class CreateProposals < ActiveRecord::Migration
     create_table :proposals do |t|
       t.string :chosen_answer
       t.references :question
-
       t.timestamps
     end
   end

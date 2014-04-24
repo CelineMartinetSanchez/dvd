@@ -1,6 +1,6 @@
 <h1>Editing quiz</h1>
 
-<%= form_for([@test, @quiz], url: test_quizzes_path(@test, @quiz), html: { method: :put } ) do |f| %>
+<%= form_for @quiz, url: quizzes_path(@quiz), html: { method: :put } ) do |f| %>
 
 	<%= render 'form', f: f %>
 

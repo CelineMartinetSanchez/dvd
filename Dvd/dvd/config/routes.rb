@@ -1,27 +1,29 @@
 Dvd::Application.routes.draw do
 
   # Users routes
-  devise_for :users
+  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
   get '/profile' => 'users#show'
 
   # Different roots according to authentifications
   devise_scope :user do
     authenticated :user do
-      root :to => 'tests#index', as: :authenticated_root
+      root :to => 'quizzes#index', as: :authenticated_root
     end
+
+    # get 'sign_out', :to => 'devise/sessions#destroy', :as => :destroy_user_session
   #   unauthenticated :user do
   #     root :to => 'high_voltage/pages#show', id: 'home', as: :unauthenticated_root
       
   #   end
   end  
 
-  resources :tests do
-    resources :quizzes  do
-      resources :questions
-    end
+  resources :quizzes  do
+    resources :questions 
   end
 
-  resources :answers
+  resources :questions do
+    resources :answers
+  end
 
   resources :proposals
 

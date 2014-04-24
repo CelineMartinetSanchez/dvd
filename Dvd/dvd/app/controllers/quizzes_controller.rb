@@ -1,6 +1,5 @@
 class QuizzesController < ApplicationController
   before_action :set_quiz, only: [:show, :edit, :update, :destroy]
-  before_action :set_test
 
   def index
     @quizzes = Quiz.all
@@ -28,13 +27,13 @@ class QuizzesController < ApplicationController
 
     # Sorting questions
     @questions = Question.tagged_with(asked_themes, on: :theme, any: true).tagged_with(asked_levels, on: :level, any: true)
-
-    @quiz = @test.quizzes.build(themes: asked_themes, levels: asked_levels, questions: @questions)
+    
+    @quiz = current_user.quizzes.build(themes: asked_themes, levels: asked_levels, questions: @questions)
 
     respond_to do |format|
       if @quiz.save
 
-        format.html { redirect_to test_quiz_question_path(quiz_id:@quiz.id, id:@questions.first.id), notice: 'Quiz was successfully created.' }
+        format.html { redirect_to quiz_question_path(quiz_id:@quiz.id, id:@questions.first.id), notice: 'Quiz was successfully created.' }
         format.json { render action: 'show', status: :created, location: @questions }
       else
         format.html { render action: 'new' }
@@ -64,10 +63,6 @@ class QuizzesController < ApplicationController
   end
 
   private
-
-    def set_test
-      @test = Test.find(params[:test_id])
-    end
 
     def set_quiz
       @quiz = Quiz.find(params[:id])

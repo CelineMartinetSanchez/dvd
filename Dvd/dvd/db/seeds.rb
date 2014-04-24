@@ -20,17 +20,17 @@ q3.theme_list.add("google", "bing")
 q3.level_list.add("compliqué")
 
 # ANSWERS
-a1 = q1.answers.build(good_answer:"bonne réponse", bad_answer:"mauvaise réponse", bad_answer_2:"mauvaise réponse 2")
-a2 = q2.answers.build(good_answer:"bonne réponse bing!", bad_answer:"mauvaise réponse", bad_answer_2:"mauvaise réponse 2")
-a3 = q3.answers.build(good_answer:"bonne réponse Google", bad_answer:"mauvaise réponse", bad_answer_2:"mauvaise réponse 2")
+# a1 = q1.answers.build(good_answer:"bonne réponse", bad_answer:"mauvaise réponse", bad_answer_2:"mauvaise réponse 2")
+# a2 = q2.answers.build(good_answer:"bonne réponse bing!", bad_answer:"mauvaise réponse", bad_answer_2:"mauvaise réponse 2")
+# a3 = q3.answers.build(good_answer:"bonne réponse Google", bad_answer:"mauvaise réponse", bad_answer_2:"mauvaise réponse 2")
 
 q1.save
 q2.save
 q3.save
 
-a1.save
-a2.save
-a3.save
+# a1.save
+# a2.save
+# a3.save
 #q2.tag_list.remove("awesome", "slick")
 #@user.tag_list.add("awesomer, slicker", parse: true)
 

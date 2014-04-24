@@ -1,4 +1,4 @@
-<%= simple_form_for ([@test, @quiz]), defaults: { input_html: { class: 'form-horizontal' } } do |f| %>
+<%= simple_form_for @quiz, defaults: { input_html: { class: 'form-horizontal' } } do |f| %>
   <% if @quiz.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@quiz.errors.count, "error") %> prohibited this quiz from being saved:</h2>

@@ -66,3 +66,7 @@ gem 'high_voltage', '~> 2.1.0'
 
 # Next questions
 gem 'acts_as_list'
+
+# Omniauth
+gem 'omniauth-facebook'
+gem 'omniauth-twitter'

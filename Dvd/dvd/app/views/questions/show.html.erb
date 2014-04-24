@@ -10,6 +10,19 @@
   <%= @question.explanation %>
 </p>
 
-(get possible answers)
+<%= render 'quiz_form' %>
 
-# <%= link_to 'Question suivante', test_quiz_question_path(@test, @quiz, @next_question) %>
+
+
+
+
+<% if @question.next(@quiz).present? %>
+
+ <%= link_to 'Question suivante', quiz_question_path(@quiz, @question.next(@quiz)) %>
+
+ <% else %>
+
+ <%= link_to 'Finish quiz', quizzes_path %>
+
+ <%= "Finish quiz" %>
+<% end %>

@@ -1,10 +1,8 @@
 class CreateAnswers < ActiveRecord::Migration
   def change
     create_table :answers do |t|
-      t.string :good_answer
-      t.string :bad_answer
-      t.string :bad_answer_2
-      t.references :test
+    	t.boolean :true_false
+    	t.string :title
       t.references :question
 
       t.timestamps

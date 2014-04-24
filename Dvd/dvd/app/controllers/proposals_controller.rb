@@ -1,4 +1,5 @@
 class ProposalsController < ApplicationController
+  before_action :set_quiz
   before_action :set_proposal, only: [:show, :edit, :update, :destroy]
 
   # GET /proposals
@@ -62,7 +63,10 @@ class ProposalsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+    def set_quiz
+      @quiz = Quiz.find(params[:id])
+    end
+
     def set_proposal
       @proposal = Proposal.find(params[:id])
     end

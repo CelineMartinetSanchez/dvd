@@ -1,23 +1,43 @@
 class QuestionsQuiz < ActiveRecord::Base
 	belongs_to :quiz
 	belongs_to :question
-	self.primary_key = [:quiz_id, :question_id]
+	# acts_as_list :scope => :question_quiz_id
+	# self.primary_key = [:quiz_id, :question_id]
+
+	scope :by_quiz, ->(quiz){ where(quiz_id: quiz.id) }
+
 
 	validates_uniqueness_of :quiz_id, :scope=>:question_id
 
+
+	# def __class__
+	# 	self.class
+	# end
+
+	# __method__
+	# __FILE__
+
+
 	before_save do
 	  if self.position.blank?
-	    last = QuestionsQuiz.find(:first, :conditions=>["question_id = ?", self.question.id], :order=>"position DESC")
-	    self.position = (last.blank? ? 0 : (last.position + 1))
+	    last_position = QuestionsQuiz.by_quiz(self.quiz).order(:position).last.try(:position) || -1
+	    self.position = last_position + 1
+
+	    # self.position = if cob
+	    # 	gtgt
+	    # else
+	    # 	hyhyh
+	    # end
+
 	  end
 	end
 	
 	def next
-	  QuestionsQuiz.first(:conditions=>["question_id = ? AND position > ?", self.question_id, self.position], :order=>"position")
+	  QuestionsQuiz.first(:conditions=>["quiz_id = ? AND position > ?", self.quiz_id, self.position], :order=>"position")
 	end
 	
 	def previous
-	  QuestionsQuiz.last(:conditions=>["question_id = ? AND position < ?", self.question_id, self.position], :order=>"position")
+	  QuestionsQuiz.last(:conditions=>["quiz_id = ? AND position < ?", self.quiz_id, self.position], :order=>"position")
 	end
 
 

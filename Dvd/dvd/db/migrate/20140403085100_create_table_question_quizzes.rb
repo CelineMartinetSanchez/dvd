@@ -1,6 +1,6 @@
-class CreateJoinTableQuizQuestion < ActiveRecord::Migration
+class CreateTableQuestionQuizzes < ActiveRecord::Migration
   def change
-    create_join_table :quizzes, :questions do |t|
+    create_table :questions_quizzes do |t|
     	t.belongs_to :quiz
     	t.belongs_to :question
     	t.integer :position
