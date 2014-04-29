@@ -40,6 +40,7 @@ GEM
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
     builder (3.1.4)
+    cancancan (1.7.1)
     cocoon (1.2.6)
     coderay (1.1.0)
     coffee-rails (4.0.1)
@@ -182,6 +183,7 @@ DEPENDENCIES
   acts_as_list
   better_errors
   binding_of_caller
+  cancancan (~> 1.7)
   cocoon
   coffee-rails (~> 4.0.0)
   devise

@@ -1,8 +1,9 @@
 class CreateProposals < ActiveRecord::Migration
   def change
     create_table :proposals do |t|
-      t.string :chosen_answer
+      t.references :answer
       t.references :question
+      t.references :quiz
       t.timestamps
     end
   end

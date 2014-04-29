@@ -1,11 +1,16 @@
 class QuizzesController < ApplicationController
   before_action :set_quiz, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
+  load_and_authorize_resource param_method: :quiz_proposals_params
 
   def index
-    @quizzes = Quiz.all
+    @quizzes = current_user.quizzes
+    @questions = Question.all
   end
 
   def show
+    proposals = @quiz.proposals
+    @score = score(proposals)
   end
 
   def new
@@ -78,6 +83,21 @@ class QuizzesController < ApplicationController
 
     def get_levels
       Question.level_counts
+    end
+
+    def score(proposals)
+      score = 0
+      proposals.each do |p|
+        if p.valid?
+           score +=1
+        end
+      end
+      return score
+    end
+
+    # Users can only update proposal attributes
+    def quiz_proposals_params
+      params.require(:quiz).permit(question_attributes:[:proposals_attributes])
     end
 
 end

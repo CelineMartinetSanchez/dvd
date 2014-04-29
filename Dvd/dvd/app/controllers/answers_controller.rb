@@ -1,5 +1,7 @@
 class AnswersController < ApplicationController
   before_action :set_answer, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
+  load_and_authorize_resource param_method: :answer_params
 
   # GET /answers
   # GET /answers.json
@@ -69,6 +71,6 @@ class AnswersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def answer_params
-      params.require(:answer).permit(:good_answer, :bad_answer, :bad_answer_2)
+      params.require(:answer).permit()
     end
 end

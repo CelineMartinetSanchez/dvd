@@ -4,8 +4,8 @@
   <thead>
     <tr>
       <th>Questions</th>
-      <th>Bonne réponse</th>
-      <th>Réponse choisie</th>
+      <th>Réponses possibles</th>
+      <th>Réponse(s) choisie(s)</th>
       <th>Explication</th>
     </tr>
   </thead>
@@ -14,8 +14,14 @@
     <% @quiz.questions.each do |q| %>
       <tr>
         <td><%= q.query %></td>
-        <td><% q.answers.each do |answer| %>
+        <td>
+          <% q.answers.each do |answer| %>
             <%= answer.title %>
+          <% end %>
+        </td>
+        <td>
+          <% q.proposals.where(quiz_id:@quiz.id).each do |proposal| %>
+            <%= proposal.answer.title %>
           <% end %>
         </td>
         <td><%= q.explanation %></td>
@@ -23,6 +29,7 @@
     <% end %>
   </tbody>
 </table>
+<%= @score %>
 
 
 <%= link_to 'Back', quizzes_path %>

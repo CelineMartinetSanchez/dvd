@@ -1,9 +1,9 @@
-<h1>Listing users</h1>
+<h1>Tous les utilisateurs</h1>
 
 <table>
   <thead>
     <tr>
-      <th>Name</th>
+      <th>Nom</th>
       <th></th>
       <th></th>
       <th></th>
@@ -14,9 +14,9 @@
     <% @users.each do |user| %>
       <tr>
         <td><%= user.name %></td>
-        <td><%= link_to 'Show', user %></td>
-        <td><%= link_to 'Edit', edit_user_path(user) %></td>
-        <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Voir', user %></td>
+        <td><%= link_to 'Editer', edit_user_path(user) %></td>
+        <td><%= link_to 'Détruire', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -24,4 +24,4 @@
 
 <br>
 
-<%= link_to 'New User', new_user_path %>
+<%= link_to 'Nouvel utilisateur', new_user_path %>

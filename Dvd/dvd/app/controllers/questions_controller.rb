@@ -1,6 +1,8 @@
 class QuestionsController < ApplicationController
-  before_action :set_quiz, only: [:show]
+  before_action :set_quiz, only: [:show, :update]
   before_action :set_question, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
+  load_and_authorize_resource param_method: :question_params
 
   # GET /questions
   # GET /questions.json
@@ -16,6 +18,8 @@ class QuestionsController < ApplicationController
   def show
     # passe l'id de la question suivante
     @next_question = @question.next(@quiz)
+    @answers = @question.answers
+    @proposal = Proposal.new
 
     # @question.proposals.create()
   end
@@ -63,9 +67,11 @@ class QuestionsController < ApplicationController
       if @question.update(question_params)
         format.html { redirect_to @question, notice: 'Question was successfully updated.' }
         format.json { head :no_content }
+        format.js { head :no_content }
       else
         format.html { render action: 'edit' }
         format.json { render json: @question.errors, status: :unprocessable_entity }
+        format.js { head :unprocessable_entity }
       end
     end
   end
@@ -88,7 +94,22 @@ class QuestionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def question_params
-      params.require(:question).permit(:query, :explanation, answers_attributes:[:id, :title, :true_false, :_destroy])
+      if params[:question] and params[:question][:proposals_attributes]
+        params[:question][:proposals_attributes].each do |idx, attrs|
+          attrs.merge!({
+            question_id: @question.id,
+            quiz_id: @quiz.id
+          })
+        end
+      else
+        params.require(:question)
+              .permit(:query, :explanation, answers_attributes:[:id, :title, :true_false, :_destroy], 
+                      proposals_attributes: [:answer_id, :question_id, :quiz_id])
+      end
+
+      params.require(:question)
+            .permit(:query, :explanation, answers_attributes:[:id, :title, :true_false, :_destroy], 
+                    proposals_attributes: [:answer_id, :question_id, :quiz_id])
     end
 
     def set_quiz

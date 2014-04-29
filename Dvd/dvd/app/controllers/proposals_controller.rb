@@ -1,6 +1,7 @@
 class ProposalsController < ApplicationController
   before_action :set_quiz
   before_action :set_proposal, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
 
   # GET /proposals
   # GET /proposals.json
@@ -25,7 +26,7 @@ class ProposalsController < ApplicationController
   # POST /proposals
   # POST /proposals.json
   def create
-    @proposal = Proposal.new(proposal_params)
+    # @proposal.build()
 
     respond_to do |format|
       if @proposal.save
@@ -73,6 +74,6 @@ class ProposalsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def proposal_params
-      params.require(:proposal).permit(:chosen_answer)
+      params.require(:proposal).permit(:answer_id, :question_id, :quiz_id)
     end
 end

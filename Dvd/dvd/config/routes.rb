@@ -25,7 +25,7 @@ Dvd::Application.routes.draw do
     resources :answers
   end
 
-  resources :proposals
+  # resources :proposals
 
   # Pages statiques
 
@@ -33,6 +33,7 @@ Dvd::Application.routes.draw do
 
 
   root to: 'high_voltage/pages#show', id: 'home'
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

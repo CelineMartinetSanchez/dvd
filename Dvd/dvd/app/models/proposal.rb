@@ -1,7 +1,13 @@
 class Proposal < ActiveRecord::Base
 	belongs_to :question
+	belongs_to :quiz
+	belongs_to :answer
 
 	def valid?
-	  # return if the answer was correct or not
+	  if self.answer.true_false == true
+	  	return true
+	  else
+	  	return false
+	  end
 	end
 end

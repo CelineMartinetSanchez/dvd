@@ -73,3 +73,6 @@ gem 'omniauth-twitter'
 
 # Handle nested forms
 gem "cocoon"
+
+# Handle authorizations
+gem 'cancancan', '~> 1.7'

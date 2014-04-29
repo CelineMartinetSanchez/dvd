@@ -1,9 +1,9 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Name:</strong>
+  <strong>Nom:</strong>
   <%= @user.name %>
 </p>
 
-<%= link_to 'Edit', edit_user_registration_path(@user) %> |
-<%= link_to 'Back', authenticated_root_path(@user) %>
+<%= link_to 'Editer', edit_user_registration_path(@user) %> |
+<%= link_to 'Retour', authenticated_root_path(@user) %>

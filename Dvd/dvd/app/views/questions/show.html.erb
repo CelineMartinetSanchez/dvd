@@ -1,27 +1,41 @@
 <p id="notice"><%= notice %></p>
 
+<!-- Questions -->
 <p>
-  <strong>Query:</strong>
+  <strong>Question</strong>
   <%= @question.query %>
 </p>
 
 <p>
-  <strong>Explanation:</strong>
+  <strong>Indice</strong>
   <%= @question.explanation %>
 </p>
 
 
 
+<!-- Answers -->
+<%= simple_form_for [@quiz, @question], remote: true, html: { class: 'form-horizontal', id: 'proposals' } do |f| %>
 
+		<p>Réponse :</p>	
 
+		<% @answers.each do |answer| %>
+			<%= f.simple_fields_for :proposals, @question.proposals.build do |proposal_builder| %>
+ 				 
+ 				<%= proposal_builder.check_box :answer_id, { class: "checkbox" }, answer.id, 0 %>
+      	<%= proposal_builder.label :answer_id, answer.title %>
+ 			  
+		  <% end %>
+		<% end %>
+
+<% end %>
 
 <% if @question.next(@quiz).present? %>
 
- <%= link_to 'Question suivante', quiz_question_path(@quiz, @question.next(@quiz)) %>
+ <%= link_to 'Question suivante', quiz_question_path(@quiz, @question.next(@quiz)), rel: 'next' %>
 
  <% else %>
 
- <%= link_to 'Finish quiz', quizzes_path %>
+ <%= link_to 'Finish quiz', quizzes_path, rel: 'next' %>
 
  <%= "Finish quiz" %>
 <% end %>

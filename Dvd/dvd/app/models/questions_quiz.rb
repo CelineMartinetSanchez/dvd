@@ -1,8 +1,7 @@
 class QuestionsQuiz < ActiveRecord::Base
 	belongs_to :quiz
 	belongs_to :question
-	# acts_as_list :scope => :question_quiz_id
-	# self.primary_key = [:quiz_id, :question_id]
+
 
 	scope :by_quiz, ->(quiz){ where(quiz_id: quiz.id) }
 
@@ -45,24 +44,3 @@ class QuestionsQuiz < ActiveRecord::Base
 
 
 end
-
-
-   # belongs_to :video
-   # belongs_to :packvideo
-   
-   # validates_uniqueness_of :video_id, :scope=>:packvideo_id
-   
-   # before_save do
-   #   if self.position.blank?
-   #     last = Packvideojoin.find(:first, :conditions=>["packvideo_id = ?", self.packvideo.id], :order=>"position DESC")
-   #     self.position = (last.blank? ? 0 : (last.position + 1))
-   #   end
-   # end
-   
-   # def next
-   #   Packvideojoin.first(:conditions=>["packvideo_id = ? AND position > ?", self.packvideo_id, self.position], :order=>"position")
-   # end
-   
-   # def previous
-   #   Packvideojoin.last(:conditions=>["packvideo_id = ? AND position < ?", self.packvideo_id, self.position], :order=>"position")
-   # end
