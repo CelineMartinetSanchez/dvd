@@ -50,6 +50,7 @@ ActiveRecord::Schema.define(version: 20140428215715) do
     t.integer  "user_id"
     t.string   "levels"
     t.string   "themes"
+    t.integer  "score"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

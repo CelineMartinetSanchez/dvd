@@ -34,6 +34,9 @@ Dvd::Application.routes.draw do
 
   root to: 'high_voltage/pages#show', id: 'home'
 
+  post '/quizzes/:id/send_score' =>  'score#send_score', as: :send_score
+  get '/quizzes/:id/score' => 'score#show', as: :score
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

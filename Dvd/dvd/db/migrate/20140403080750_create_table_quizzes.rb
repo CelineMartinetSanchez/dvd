@@ -4,6 +4,7 @@ class CreateTableQuizzes < ActiveRecord::Migration
   		t.references :user
   		t.string :levels
   		t.string :themes
+  		t.integer :score
   	  t.timestamps
   	end
   end

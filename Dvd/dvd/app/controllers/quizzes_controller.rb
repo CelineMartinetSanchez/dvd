@@ -1,5 +1,5 @@
 class QuizzesController < ApplicationController
-  before_action :set_quiz, only: [:show, :edit, :update, :destroy]
+  before_action :set_quiz, only: [:show, :edit, :update, :destroy, :result]
   before_action :authenticate_user!
   load_and_authorize_resource param_method: :quiz_proposals_params
 
@@ -9,8 +9,7 @@ class QuizzesController < ApplicationController
   end
 
   def show
-    proposals = @quiz.proposals
-    @score = score(proposals)
+    # @score = score(@quiz.questions)
   end
 
   def new
@@ -67,6 +66,10 @@ class QuizzesController < ApplicationController
     end
   end
 
+  def result
+    @score = score(@quiz.questions)
+  end
+
   private
 
     def set_quiz
@@ -84,16 +87,7 @@ class QuizzesController < ApplicationController
     def get_levels
       Question.level_counts
     end
-
-    def score(proposals)
-      score = 0
-      proposals.each do |p|
-        if p.valid?
-           score +=1
-        end
-      end
-      return score
-    end
+               
 
     # Users can only update proposal attributes
     def quiz_proposals_params

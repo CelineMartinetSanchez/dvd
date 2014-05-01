@@ -35,7 +35,6 @@
 
  <% else %>
 
- <%= link_to 'Finish quiz', quizzes_path, rel: 'next' %>
+ <%= link_to 'Finish quiz', send_score_path(id:@quiz.id), method:'post', class:"next" %>
 
- <%= "Finish quiz" %>
 <% end %>

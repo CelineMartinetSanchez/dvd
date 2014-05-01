@@ -12,18 +12,21 @@ q3 = Question.create(query:"I am so powerful", explanation:"Google")
 # THEMES AND LEVELS
 q1.theme_list.add("google")
 q1.level_list.add("facile")
-q1.answers.build(title:"Google", true_false:"true")
-q1.answers.build(title:"Bing", true_false:"false")
-q1.answers.build(title:"Yahoo", true_false:"false")
+q1.answers.build(title:"Google true", true_false:"true")
+q1.answers.build(title:"Bing false", true_false:"false")
+q1.answers.build(title:"Yahoo false", true_false:"false")
 
 q2.theme_list.add("bing")
 q2.level_list.add("compliqué")
-q2.answers.build(title:"Google", true_false:"false")
-q2.answers.build(title:"Bing", true_false:"true")
-q2.answers.build(title:"Yahoo", true_false:"false")
+q2.answers.build(title:"Google true", true_false:"true")
+q2.answers.build(title:"Bing true", true_false:"true")
+q2.answers.build(title:"Yahoo false", true_false:"false")
 
 q3.theme_list.add("google", "bing")
 q3.level_list.add("compliqué")
+q3.answers.build(title:"Google true", true_false:"true")
+q3.answers.build(title:"Bing true", true_false:"true")
+q3.answers.build(title:"Yahoo false", true_false:"false")
 
 # ANSWERS
 # a1 = q1.answers.build(good_answer:"bonne réponse", bad_answer:"mauvaise réponse", bad_answer_2:"mauvaise réponse 2")

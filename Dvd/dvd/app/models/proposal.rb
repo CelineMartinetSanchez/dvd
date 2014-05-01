@@ -10,4 +10,9 @@ class Proposal < ActiveRecord::Base
 	  	return false
 	  end
 	end
+
+	def valid
+	  self.answer.true_false == true
+	end
+	
 end
