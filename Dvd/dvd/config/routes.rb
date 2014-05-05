@@ -19,6 +19,7 @@ Dvd::Application.routes.draw do
 
   resources :quizzes  do
     resources :questions 
+    resources :questions_quizzes, only: :update
   end
 
   resources :questions do
@@ -29,7 +30,7 @@ Dvd::Application.routes.draw do
 
   # Pages statiques
 
-  get '/about' => 'high_voltage/pages#show', id: 'about'
+  get '/a-propos' => 'high_voltage/pages#show', id: 'about', as: :about
 
 
   root to: 'high_voltage/pages#show', id: 'home'

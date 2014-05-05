@@ -46,8 +46,8 @@ q3.save
 
 
 # USERS
-user = User.create! :name => 'John Doe', :email => 'john@gmail.com', :password => 'topsecret', :password_confirmation => 'topsecret'
-user2 = User.create! :name => 'Céline LS', :email => 'celinems@gmail.com', :password => '123456789', :password_confirmation => '123456789'
+user = User.create! :first_name => 'John', :last_name => 'Doe', :email => 'john@gmail.com', :password => 'topsecret', :password_confirmation => 'topsecret'
+user2 = User.create! :first_name => 'Céline', :last_name => 'LS', :email => 'celinems@gmail.com', :password => '123456789', :password_confirmation => '123456789'
 
 # I am the master
 user2.update_attribute(:admin, true)

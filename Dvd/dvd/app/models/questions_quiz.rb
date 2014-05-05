@@ -2,6 +2,8 @@ class QuestionsQuiz < ActiveRecord::Base
 	belongs_to :quiz
 	belongs_to :question
 
+	has_many :proposals
+	accepts_nested_attributes_for :proposals, reject_if: proc { |attrs| attrs[:answer_id].to_i == 0 }
 
 	scope :by_quiz, ->(quiz){ where(quiz_id: quiz.id) }
 

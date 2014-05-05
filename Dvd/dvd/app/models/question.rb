@@ -4,8 +4,7 @@ class Question < ActiveRecord::Base
 	has_many :answers, :dependent => :destroy
 	accepts_nested_attributes_for :answers, :reject_if => :all_blank, :allow_destroy => true
 
-	has_many :proposals
-	accepts_nested_attributes_for :proposals, reject_if: proc { |attrs| attrs[:answer_id].to_i == 0 }
+	has_many :proposals, through: :questions_quizzes
 
 
 	#acts_as_taggable # Alias for acts_as_taggable_on :tags

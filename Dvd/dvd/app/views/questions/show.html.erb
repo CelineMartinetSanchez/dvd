@@ -14,12 +14,12 @@
 
 
 <!-- Answers -->
-<%= simple_form_for [@quiz, @question], remote: true, html: { class: 'form-horizontal', id: 'proposals' } do |f| %>
+<%= simple_form_for [@quiz, @questions_quiz], remote: true, html: { class: 'form-horizontal', id: 'proposals' } do |f| %>
 
 		<p>Réponse :</p>	
 
 		<% @answers.each do |answer| %>
-			<%= f.simple_fields_for :proposals, @question.proposals.build do |proposal_builder| %>
+			<%= f.simple_fields_for :proposals, @questions_quiz.proposals.build do |proposal_builder| %>
  				 
  				<%= proposal_builder.check_box :answer_id, { class: "checkbox" }, answer.id, 0 %>
       	<%= proposal_builder.label :answer_id, answer.title %>
@@ -35,6 +35,6 @@
 
  <% else %>
 
- <%= link_to 'Finish quiz', send_score_path(id:@quiz.id), method:'post', class:"next" %>
+ <%= link_to 'Finish quiz', send_score_path(id:@quiz.id), method:'post', rel: 'next' %>
 
 <% end %>

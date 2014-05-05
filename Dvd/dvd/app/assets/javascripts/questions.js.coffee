@@ -3,6 +3,4 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 
-$('a[rel=next]').click(-> $('form#proposals').submit())
-$(".next").click(-> $('form#proposals').submit())
-# $(".next nofollow").click(-> $('form#proposals').submit())
+$('a[rel*="next"]').click(-> $('form#proposals').submit())

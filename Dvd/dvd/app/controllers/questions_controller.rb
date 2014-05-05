@@ -20,6 +20,7 @@ class QuestionsController < ApplicationController
     @next_question = @question.next(@quiz)
     @answers = @question.answers
     @proposal = Proposal.new
+    @questions_quiz = @quiz.questions_quizzes.where(question: @question).first
 
     # @question.proposals.create()
   end
@@ -94,22 +95,8 @@ class QuestionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def question_params
-      if params[:question] and params[:question][:proposals_attributes]
-        params[:question][:proposals_attributes].each do |idx, attrs|
-          attrs.merge!({
-            question_id: @question.id,
-            quiz_id: @quiz.id
-          })
-        end
-      else
-        params.require(:question)
-              .permit(:query, :explanation, answers_attributes:[:id, :title, :true_false, :_destroy], 
-                      proposals_attributes: [:answer_id, :question_id, :quiz_id])
-      end
-
       params.require(:question)
-            .permit(:query, :explanation, answers_attributes:[:id, :title, :true_false, :_destroy], 
-                    proposals_attributes: [:answer_id, :question_id, :quiz_id])
+            .permit(:query, :explanation, answers_attributes:[:id, :title, :true_false, :_destroy])
     end
 
     def set_quiz

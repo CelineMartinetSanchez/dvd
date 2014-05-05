@@ -3,7 +3,7 @@ class CreateProposals < ActiveRecord::Migration
     create_table :proposals do |t|
       t.references :answer
       t.references :question
-      t.references :quiz
+      t.references :questions_quiz
       t.timestamps
     end
   end

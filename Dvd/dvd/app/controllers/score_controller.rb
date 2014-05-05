@@ -6,7 +6,7 @@ class ScoreController < ApplicationController
 	end
 
 	def send_score
-		@quiz.score = score(@quiz.questions)
+		@quiz.score = score(@quiz.questions_quizzes)
 		@quiz.save
 		
 		redirect_to score_path(id:@quiz.id)
@@ -15,13 +15,13 @@ class ScoreController < ApplicationController
 
 	private
 
-	def score(questions)
+	def score(questions_quizzes)
 	  score = 0
-	  questions.each do |q|
-	    if q.proposals.all? {|p|p.valid}
-	       score +=1
+	  questions_quizzes.each do |q|
+	    if q.proposals.all? { |p| p.valid? }
+	      score += 1
 	    else
-	    	score +=0
+	    	score += 0
 	    end
 	  end
 	  return score
